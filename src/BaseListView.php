@@ -74,6 +74,7 @@ abstract class BaseListView extends Widget
         }
 
         $options = $this->options;
+        $options['encode'] = false;
         $tag = ArrayHelper::remove($options, 'tag', 'div');
 
         return Html::tag($tag, $content, $options);
@@ -137,6 +138,7 @@ abstract class BaseListView extends Widget
         }
 
         $summaryOptions = $this->summaryOptions;
+        $summaryOptions['encode'] = false;
         $tag = ArrayHelper::remove($summaryOptions, 'tag', 'div');
 
         if ($this->paginator instanceof OffsetPaginator) {

@@ -176,6 +176,7 @@ final class ListView extends BaseListView implements ViewContextInterface
             $key,
             JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
         ) : (string)$key;
+        $options['encode'] = false;
 
         return Html::tag($tag, $content, $options);
     }
