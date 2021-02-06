@@ -32,7 +32,7 @@ abstract class BaseListView extends Widget
     protected ?LinkSorter $sorter = null;
     protected string $summary = 'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> ' .
         '{totalCount, plural, one{item} other{items}}';
-    protected array $summaryOptions = ['class' => 'summary'];
+    protected array $summaryOptions = [];
     protected bool $showOnEmpty = false;
     protected ?string $emptyText = 'No results found.';
     protected bool $showEmptyText = true;
@@ -151,47 +151,9 @@ abstract class BaseListView extends Widget
 
             $page = $this->paginator->getCurrentPage() + 1;
             $pageCount = $this->paginator->getCurrentPageSize();
-
-            if (($summaryContent = $this->summary) === null) {
-                return Html::tag(
-                    $tag,
-                    $this->translator->translate(
-                        $this->summary,
-                        [
-                            'begin' => $begin,
-                            'end' => $end,
-                            'count' => $count,
-                            'totalCount' => $totalCount,
-                            'page' => $page,
-                            'pageCount' => $pageCount,
-                        ],
-                        'user',
-                    ),
-                    $summaryOptions
-                );
-            }
         } else {
             $begin = $page = $pageCount = 1;
             $end = $totalCount = $count;
-
-            if (($summaryContent = $this->summary) === null) {
-                return Html::tag(
-                    $tag,
-                    $this->translator->translate(
-                        $this->summary,
-                        [
-                            'begin' => $begin,
-                            'end' => $end,
-                            'count' => $count,
-                            'totalCount' => $totalCount,
-                            'page' => $page,
-                            'pageCount' => $pageCount,
-                        ],
-                        'user',
-                    ),
-                    $summaryOptions
-                );
-            }
         }
 
         return Html::tag(
@@ -202,7 +164,7 @@ abstract class BaseListView extends Widget
                     'begin' => $begin,
                     'end' => $end,
                     'count' => $count,
-                    'totalCount' => $count,
+                    'totalCount' => $this->summary === null ? $totalCount : $count,
                     'page' => $page,
                     'pageCount' => $pageCount,
                 ],
