@@ -7,7 +7,6 @@ namespace Yiisoft\Yii\DataView;
 use JsonException;
 use Psr\Http\Message\ServerRequestInterface;
 use Yiisoft\Arrays\ArrayHelper;
-use Yiisoft\Data\Paginator\KeysetPaginator;
 use Yiisoft\Data\Paginator\OffsetPaginator;
 use Yiisoft\Data\Paginator\PaginatorInterface;
 use Yiisoft\Html\Html;
@@ -32,7 +31,7 @@ abstract class BaseListView extends Widget
     protected PaginatorInterface $paginator;
     protected ?LinkSorter $sorter = null;
     protected string $summary = 'Showing <b>{begin, number}-{end, number}</b> of <b>{totalCount, number}</b> ' .
-        '{totalCount, plural, one{item} other{items}}.';
+        '{totalCount, plural, one{item} other{items}}';
     protected array $summaryOptions = ['class' => 'summary'];
     protected bool $showOnEmpty = false;
     protected ?string $emptyText = 'No results found.';
