@@ -132,7 +132,7 @@ abstract class BaseListView extends Widget
     {
         $count = $this->paginator->getTotalItems();
 
-        if ($count < 1) {
+        if ($count < 1 || $this->summary === '') {
             return '';
         }
 
